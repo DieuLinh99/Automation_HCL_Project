@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 public class Search {
 	private WebDriver driver;
-	By viewInvoice = By.xpath("//div[text()=' View Invoices ']");
+	By viewInvoice = By.name("clientId");
 	By invoiceNumber = By.name("invoiceNumber");
 	By clientCode = By.xpath("(//input[contains(@class,'mat-input-element mat-form-field-autofill-control')])[2]");
 	By supplierCode = By.name("supplierId");

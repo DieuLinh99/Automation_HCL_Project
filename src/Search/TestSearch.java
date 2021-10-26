@@ -52,8 +52,7 @@ public class TestSearch {
 
 		search = new Search(driver);
 		search.SearchByClientCode("CL_00006");
-		WebElement textbox1 = driver.findElement(
-				By.xpath("(//input[contains(@class,'mat-input-element mat-form-field-autofill-control')])[2]"));
+		WebElement textbox1 = driver.findElement(By.name("clientId"));
 		textbox1.sendKeys(Keys.ENTER);
 		String c1 = driver.findElement(By.xpath("//td[text()=' 11 ']")).getText();
 		if (c1.equals("11")) {
@@ -65,8 +64,7 @@ public class TestSearch {
 
 	@Test
 	public void searchByInvoice() {
-		driver.findElement(
-				By.xpath("(//input[contains(@class,'mat-input-element mat-form-field-autofill-control')])[2]")).clear();
+		driver.findElement(By.name("clientId")).clear();
 		search = new Search(driver);
 		search.SearchByInvoiceNumber("02255666");
 		WebElement textbox = driver.findElement(By.name("invoiceNumber"));
