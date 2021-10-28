@@ -49,12 +49,12 @@ public class TestLogin {
 				Assert.assertTrue(true);
 				test.log(LogStatus.PASS, "Successfully");
 			} else {
-				//driver.findElement(By.xpath("(//mat-icon[text()='logout'])[2]")).click();
 				Assert.assertTrue(false);
 				test.log(LogStatus.FAIL, "Unsuccessfully");
 			}
 		} else {
 			if (mainUrl.equals(driver.getCurrentUrl())) {
+				driver.findElement(By.xpath("(//mat-icon[text()='logout'])[2]")).click();
 				Assert.assertTrue(false);
 				test.log(LogStatus.FAIL, "Unsuccessfully");
 			} else {
