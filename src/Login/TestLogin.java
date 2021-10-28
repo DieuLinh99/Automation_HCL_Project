@@ -15,7 +15,15 @@ import com.relevantcodes.extentreports.LogStatus;
 import Pages.LoginBefore;
 import Pages.Home;
 
-
+/*
+ * Pre-condition: user access Internet && browser with latest version
+ * 
+ * Login: 1. Navigate to Login page
+ * 		  2. Check for the Fields and Enter required fields if exists
+ * 		  3. Click on Sign In button
+ * 		  4. Redirect to Dashboard
+ * 
+ */
 public class TestLogin {
 	LoginBefore login;
 	Home home;
@@ -50,7 +58,10 @@ public class TestLogin {
 			driver.findElement(By.xpath("//input[@label='username']")).sendKeys(username);
 			driver.findElement(By.xpath("//input[@label='password']")).click();
 			driver.findElement(By.xpath("//input[@label='password']")).sendKeys(password);
-			driver.findElement(By.tagName("button")).click();
+
+			login = new LoginBefore(driver);
+			login.SinginButton();
+			
 			driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
 
 			if (rs.equals("pass")) {
