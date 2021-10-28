@@ -1,5 +1,7 @@
 package Login;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,33 +14,25 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+
 public class TestLogin {
+	
+	private WebDriver driver;
+	private static String baseUrl = "http://54.237.43.64/";
+	public static String mainUrl = "http://54.237.43.64/dashboard";
 	static ExtentTest test;
 	static ExtentReports report;
-	private WebDriver driver;
-	public static String baseUrl = "http://54.237.43.64/";
-	public static String mainUrl = "http://54.237.43.64/dashboard";
-	/*
-	 * Pre-condition: network access and Browser with latest updates
-	 * 
-	 * Login: 
-	 * 	1. Navigate to Login page
-	 * 	2. Check for the Fields and Enter required fields if exists
-	 *  3. Click on Sign In button
-	 *	4. Redirect to Dashboard
-	 * 
-	 */
-	
+
 	@BeforeClass
-	public static void startTest() {
+	public void beforeClass() throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver", "D:\\AutoTest\\chromedriver\\chromedriver.exe");
+		driver = new ChromeDriver();
 		report = new ExtentReports(System.getProperty("user.dir")+"/test-output/MenuTestResults.html");
 		test = report.startTest("TestLogin");
 	}
 	
 	@Test(dataProvider = "testLogin")
 	public void testLogin(String username, String password, String rs) {
-		System.setProperty("webdriver.chrome.driver", "D:\\AutoTest\\chromedriver\\chromedriver.exe");
-		driver = new ChromeDriver();
 		driver.get(baseUrl);
 		
 		driver.findElement(By.linkText("Sign In")).click();
@@ -47,23 +41,25 @@ public class TestLogin {
 		driver.findElement(By.xpath("//input[@label='password']")).click();
 		driver.findElement(By.xpath("//input[@label='password']")).sendKeys(password);
 		driver.findElement(By.tagName("button")).click();
+		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
 		
 		if (rs.equals("pass")) {
-			if (mainUrl.equals(driver.getCurrentUrl())) {
+			if (driver.getCurrentUrl().contains(mainUrl)) {
 				driver.findElement(By.xpath("(//mat-icon[text()='logout'])[2]")).click();
 				Assert.assertTrue(true);
 				test.log(LogStatus.PASS, "Successfully");
 			} else {
+				//driver.findElement(By.xpath("(//mat-icon[text()='logout'])[2]")).click();
 				Assert.assertTrue(false);
 				test.log(LogStatus.FAIL, "Unsuccessfully");
 			}
 		} else {
 			if (mainUrl.equals(driver.getCurrentUrl())) {
 				Assert.assertTrue(false);
-				test.log(LogStatus.FAIL, "Successfully");
+				test.log(LogStatus.FAIL, "Unsuccessfully");
 			} else {
 				Assert.assertTrue(true);
-				test.log(LogStatus.PASS, "Unuccessfully");
+				test.log(LogStatus.PASS, "Successfully");
 			}
 		}
 	}
@@ -93,8 +89,9 @@ public class TestLogin {
 	}
 	
 	@AfterClass
-	public static void endTest() {
+	public void afterClass() {
 		report.endTest(test);
 		report.flush();
+		driver.quit();
 	}
 }
