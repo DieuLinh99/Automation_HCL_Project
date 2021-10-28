@@ -6,9 +6,9 @@ import org.openqa.selenium.WebDriver;
 
 public class Search {
 	private WebDriver driver;
-	By viewInvoice = By.name("clientId");
+	By viewInvoice = By.xpath("//div[text()=' View Invoices ']");
 	By invoiceNumber = By.name("invoiceNumber");
-	By clientCode = By.xpath("(//input[contains(@class,'mat-input-element mat-form-field-autofill-control')])[2]");
+	By clientCode = By.name("clientId");
 	By supplierCode = By.name("supplierId");
 	public Search(WebDriver driver) {
 		this.driver= driver;
@@ -31,7 +31,7 @@ public class Search {
 		this.setInvoiceNumber(invoiceNumber);
 	}
 	public void SearchByClientCode(String clientCode) {
-		this.ViewInvoice();
+		//this.ViewInvoice();
 		this.setClientCode(clientCode);
 	}
 	public void SearchBySupplierCode(String supplierCode) {
