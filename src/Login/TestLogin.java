@@ -55,13 +55,9 @@ public class TestLogin {
 		isButtonPresent = driver.findElement(By.tagName("button")).isDisplayed();
 
 		if(isUsernamePresent && isPasswordPresent && isButtonPresent) {
-			driver.findElement(By.xpath("//input[@label='username']")).click();
-			driver.findElement(By.xpath("//input[@label='username']")).sendKeys(username);
-			driver.findElement(By.xpath("//input[@label='password']")).click();
-			driver.findElement(By.xpath("//input[@label='password']")).sendKeys(password);
-
+			
 			login = new LoginBefore(driver);
-			login.SinginButton();
+			login.LoginSHSBank(username, password);
 			
 			driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
 
