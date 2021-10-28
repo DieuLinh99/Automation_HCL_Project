@@ -31,7 +31,7 @@ public class TestLogin {
 	private static String baseUrl = "http://54.237.43.64/";
 	private static String mainUrl = "http://54.237.43.64/dashboard";
 	//public static String username, password;
-	public static boolean isUsernamePresent, isPasswordPresent;
+	public static boolean isUsernamePresent, isPasswordPresent, isButtonPresent;
 	static ExtentTest test;
 	static ExtentReports report;
 
@@ -52,8 +52,9 @@ public class TestLogin {
 
 		isUsernamePresent = driver.findElement(By.xpath("//input[@label='username']")).isDisplayed();
 		isPasswordPresent = driver.findElement(By.xpath("//input[@label='password']")).isDisplayed();
+		isButtonPresent = driver.findElement(By.tagName("button")).isDisplayed();
 
-		if(isUsernamePresent && isPasswordPresent) {
+		if(isUsernamePresent && isPasswordPresent && isButtonPresent) {
 			driver.findElement(By.xpath("//input[@label='username']")).click();
 			driver.findElement(By.xpath("//input[@label='username']")).sendKeys(username);
 			driver.findElement(By.xpath("//input[@label='password']")).click();
