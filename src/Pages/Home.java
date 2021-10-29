@@ -9,7 +9,7 @@ public class Home {
 	WebDriver driver;
 	By login = By.linkText("Sign In");
 	By register = By.linkText("Register");
-	
+	By supplierBtn = By.xpath("//div[text()='A Supplier']");
 	public Home(WebDriver driver) {
 		this.driver = driver;
 	}
@@ -22,7 +22,13 @@ public class Home {
 	
 	public void registerBtn() {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(login));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(register));
 		driver.findElement(register).click();
+	}
+	
+	public void supplierBtn() {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(supplierBtn));
+		driver.findElement(supplierBtn).click();
 	}
 }
