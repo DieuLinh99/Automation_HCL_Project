@@ -33,7 +33,7 @@ public class Form3 {
 	}
 	
 	@Test(dataProvider = "Form3")
-	public void Form3(String accNum) {
+	public void Form3(String accNum, String result) {
 		driver.get(baseUrl);
 		reg = new Registration(driver);
 		reg.fistForm("clientTest", "clientPass01", "clientPass01");
@@ -42,6 +42,34 @@ public class Form3 {
 		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
 		
 		reg.thirdForm(accNum);
+		if (accNum.matches("[0-9]+")) {
+			if (Integer.parseInt(accNum) > 10010000 || Integer.parseInt(accNum) < 10000001) {
+				System.out.println(driver.findElement(By.xpath("//mat-label[text()='Validation Failed']")).getText());
+				test.log(LogStatus.FAIL, "Validation Failed");
+
+			} else if (accNum.equals("10000001")) {
+				System.out.println(driver
+						.findElement(By.xpath("//mat-icon[@role='img']/following-sibling::mat-label[1]")).getText());
+				test.log(LogStatus.FAIL, "You already have an account, please login");
+			} else {
+				if (driver.findElement(By.xpath("//mat-icon[@role='img']/following-sibling::mat-label[1]"))
+						.isDisplayed()) {
+					assertTrue(false);
+					test.log(LogStatus.PASS, " Supplier Registration - Bank Details - Successfully");
+				}
+
+			}
+
+		} else if (!driver.findElements(By.xpath("//mat-error[@role='alert']")).isEmpty()) {
+			System.out.println(driver.findElement(By.xpath("//mat-error[@role='alert']")).getText());
+			test.log(LogStatus.FAIL, "Required");
+
+		} else if (!driver.findElements(By.xpath("//mat-icon[@role='img']/following-sibling::mat-label[1]"))
+				.isEmpty()) {
+			System.out.println(
+					driver.findElement(By.xpath("//mat-icon[@role='img']/following-sibling::mat-label[1]")).getText());
+			test.log(LogStatus.FAIL, "Invalid Account Number");
+		}
 	}
 	
 	@DataProvider(name = "Form3")
