@@ -7,6 +7,7 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+import ClientRegPOM.DataConfig;
 import ClientRegPOM.Registration;
 
 import static org.testng.Assert.assertTrue;

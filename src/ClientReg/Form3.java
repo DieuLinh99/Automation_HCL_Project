@@ -15,6 +15,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
+
+import ClientRegPOM.DataConfig;
 import ClientRegPOM.Registration;
 public class Form3 {
 	private WebDriver driver;
@@ -27,7 +29,7 @@ public class Form3 {
 	public void setUp() {
 		System.setProperty("webdriver.chrome.driver", "/home/legallolicon/java_lib/chromedriver");
 		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+//		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
 		report = new ExtentReports(System.getProperty("user.dir") + "/test-output/MenuTestResults.html");
 		test = report.startTest("SHS Bank - Client Registration - Form3");
 	}
@@ -37,9 +39,9 @@ public class Form3 {
 		driver.get(baseUrl);
 		reg = new Registration(driver);
 		reg.fistForm("clientTest", "clientPass01", "clientPass01");
-		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
 		reg.secondForm("John", "Adam", "email@email.com", "911202546", "sample address", "hanoi", "sample state", "hanoi", "vietnam");
-		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
 		
 		reg.thirdForm(accNum);
 		if (accNum.matches("[0-9]+")) {
