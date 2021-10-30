@@ -39,9 +39,9 @@ public class Form3 {
 		driver.get(baseUrl);
 		reg = new Registration(driver);
 		reg.fistForm("clientTest", "clientPass01", "clientPass01");
-		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
 		reg.secondForm("John", "Adam", "email@email.com", "911202546", "sample address", "hanoi", "sample state", "hanoi", "vietnam");
-		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
 		
 		reg.thirdForm(accNum);
 		if (accNum.matches("[0-9]+")) {
