@@ -1,10 +1,11 @@
 package ClientRegPOM;
+
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 
 public class Registration {
-    private WebDriver driver;
+    private static WebDriver driver;
     By regButton = By.linkText("Register");
     By clientButton = By.xpath("//div[text()='A Client']");
     By userText = By.xpath("//input[@formcontrolname='userId']");
